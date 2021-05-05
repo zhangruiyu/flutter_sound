@@ -11,7 +11,7 @@ buildscript {
         //maven { url "https://oss.sonatype.org/content/repositories/releases" }
         //maven { url "https://oss.sonatype.org/content/groups/public" }
         //maven { url 'https://bintray.com/larpoux/CanardouxMaven' }
-        maven { url  "https://dl.bintray.com/larpoux/TauRepo" }
+        //maven { url  "https://dl.bintray.com/larpoux/TauRepo" }
         jcenter()
     }
 
@@ -28,7 +28,7 @@ rootProject.allprojects {
         //maven { url "https://oss.sonatype.org/content/repositories/releases" }
         //maven { url "https://oss.sonatype.org/content/groups/public" }
         //maven { url 'https://bintray.com/larpoux/CanardouxMaven' }
-        maven { url  "https://dl.bintray.com/larpoux/TauRepo" }
+        //maven { url  "https://dl.bintray.com/larpoux/TauRepo" }
         jcenter()
     }
 }
@@ -66,7 +66,9 @@ dependencies {
     // CAUTION: The following instruction is for developping and debugging the Flauto Engine
     // DO NOT INCLUDE THE FOLLOWING LINE IN A REAL APP !!!
 //    implementation project(':tau_sound_core')
-    implementation 'xyz.canardoux:tau_sound_core:6.4.8+2'
+
+    //implementation 'xyz.canardoux:tau_sound_core:6.4.8+2'
+    implementation files('libs/tau_sound_core-6.4.8+2.aar')
     // -------------------------------------------------------------------------------------
 
 }
