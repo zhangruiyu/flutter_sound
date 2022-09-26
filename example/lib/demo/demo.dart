@@ -925,9 +925,8 @@ class _MyAppState extends State<Demo> {
                 width: 56.0,
                 height: 50.0,
                 child: ClipOval(
-                  child: FlatButton(
+                  child: ElevatedButton(
                     onPressed: onStartRecorderPressed(),
-                    padding: EdgeInsets.all(8.0),
                     child: Image(
                       image: recorderAssetImage(),
                     ),
@@ -938,10 +937,8 @@ class _MyAppState extends State<Demo> {
                 width: 56.0,
                 height: 50.0,
                 child: ClipOval(
-                  child: FlatButton(
+                  child: ElevatedButton(
                     onPressed: onPauseResumeRecorderPressed(),
-                    disabledColor: Colors.white,
-                    padding: EdgeInsets.all(8.0),
                     child: Image(
                       width: 36.0,
                       height: 36.0,
@@ -978,10 +975,8 @@ class _MyAppState extends State<Demo> {
               width: 56.0,
               height: 50.0,
               child: ClipOval(
-                child: FlatButton(
+                child: ElevatedButton(
                   onPressed: onStartPlayerPressed(),
-                  disabledColor: Colors.white,
-                  padding: EdgeInsets.all(8.0),
                   child: Image(
                     image: AssetImage(onStartPlayerPressed() != null
                         ? 'res/icons/ic_play.png'
@@ -994,10 +989,8 @@ class _MyAppState extends State<Demo> {
               width: 56.0,
               height: 50.0,
               child: ClipOval(
-                child: FlatButton(
+                child: ElevatedButton(
                   onPressed: onPauseResumePlayerPressed(),
-                  disabledColor: Colors.white,
-                  padding: EdgeInsets.all(8.0),
                   child: Image(
                     width: 36.0,
                     height: 36.0,
@@ -1012,10 +1005,8 @@ class _MyAppState extends State<Demo> {
               width: 56.0,
               height: 50.0,
               child: ClipOval(
-                child: FlatButton(
+                child: ElevatedButton(
                   onPressed: onStopPlayerPressed(),
-                  disabledColor: Colors.white,
-                  padding: EdgeInsets.all(8.0),
                   child: Image(
                     width: 28.0,
                     height: 28.0,

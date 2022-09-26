@@ -26,12 +26,12 @@ import 'dart:core';
 import 'dart:io';
 import 'dart:io' show Platform;
 import 'dart:typed_data' show Uint8List;
+import 'package:flutter_sound/plugins/flutter_sound_player_platform_interface.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_sound_platform_interface/flutter_sound_platform_interface.dart';
-import 'package:flutter_sound_platform_interface/flutter_sound_player_platform_interface.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import '../flutter_sound.dart';
+import '../../plugins/flutter_sound_platform_interface.dart';
 
 /// The default blocksize used when playing from Stream.
 const _blockSize = 4096;

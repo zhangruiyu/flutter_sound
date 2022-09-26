@@ -178,10 +178,8 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
               ),
             ),
             child: Row(children: [
-              RaisedButton(
+              ElevatedButton(
                 onPressed: getRecorderFn(),
-                color: Colors.white,
-                disabledColor: Colors.grey,
                 child: Text(_mRecorder.isRecording ? 'Stop' : 'Record'),
               ),
               SizedBox(
@@ -206,10 +204,8 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
               ),
             ),
             child: Row(children: [
-              RaisedButton(
+              ElevatedButton(
                 onPressed: getPlaybackFn(),
-                color: Colors.white,
-                disabledColor: Colors.grey,
                 child: Text(_mPlayer.isPlaying ? 'Stop' : 'Play'),
               ),
               SizedBox(

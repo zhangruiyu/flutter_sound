@@ -30,6 +30,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import '../../flutter_sound.dart';
+import '../../plugins/flutter_sound_platform_interface.dart';
 import 'log.dart';
 import 'wave_header.dart';
 

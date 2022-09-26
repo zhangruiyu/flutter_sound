@@ -401,11 +401,10 @@ class _ExamplesHomePageState extends State<ExamplesAppHomePage> {
                 Text((kIsWeb && (selectedExample.flags & tNotWeb != 0))
                     ? 'Not supported on Flutter Web '
                     : ''),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: (kIsWeb && (selectedExample.flags & tNotWeb != 0))
                       ? null
                       : () => selectedExample.go(context),
-                  color: Colors.indigo,
                   child: Text(
                     'GO',
                     style: TextStyle(color: Colors.white),

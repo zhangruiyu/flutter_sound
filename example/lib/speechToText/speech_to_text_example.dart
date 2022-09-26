@@ -101,7 +101,7 @@ class _SpeechToTextExampleState extends State {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    FlatButton(
+                    ElevatedButton(
                       child: Text('Initialize'),
                       onPressed: _hasSpeech ? null : initSpeechState,
                     ),
@@ -110,17 +110,17 @@ class _SpeechToTextExampleState extends State {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    FlatButton(
+                    ElevatedButton(
                       child: Text('Start'),
                       onPressed: !_hasSpeech || speech.isListening
                           ? null
                           : startListening,
                     ),
-                    FlatButton(
+                    ElevatedButton(
                       child: Text('Stop'),
                       onPressed: speech.isListening ? stopListening : null,
                     ),
-                    FlatButton(
+                    ElevatedButton(
                       child: Text('Cancel'),
                       onPressed: speech.isListening ? cancelListening : null,
                     ),

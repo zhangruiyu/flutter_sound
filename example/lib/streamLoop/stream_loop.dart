@@ -156,10 +156,8 @@ class _StreamLoopState extends State<StreamLoop> {
               ),
             ),
             child: Row(children: [
-              RaisedButton(
+              ElevatedButton(
                 onPressed: getRecFn(),
-                color: Colors.white,
-                disabledColor: Colors.grey,
                 child: Text(_mRecorder.isRecording ? 'Stop' : 'Record'),
               ),
               SizedBox(
