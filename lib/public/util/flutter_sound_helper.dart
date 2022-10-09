@@ -42,11 +42,11 @@ FlutterSoundHelper flutterSoundHelper =
 /// Most of those utilities use FFmpeg, so are not available in the LITE flavor of Flutter Sound.
 class FlutterSoundHelper {
   /// The Flutter FFmpeg module
-  FlutterFFmpeg flutterFFmpeg;
+  FlutterFFmpeg? flutterFFmpeg;
 
-  bool _ffmpegAvailable;
-  FlutterFFmpegConfig _flutterFFmpegConfig;
-  FlutterFFprobe _flutterFFprobe;
+  bool? _ffmpegAvailable;
+  FlutterFFmpegConfig? _flutterFFmpegConfig;
+  FlutterFFprobe? _flutterFFprobe;
 
 // -------------------------------------------------------------------------------------------------------------
 
@@ -63,11 +63,11 @@ class FlutterSoundHelper {
   /// To know during runtime if FFmpeg is linked with the App.
   ///
   /// returns true if FFmpeg is available (probably the FULL version of Flutter Sound)
-  Future<bool> isFFmpegAvailable() async {
+  Future<bool?> isFFmpegAvailable() async {
     if (_flutterFFmpegConfig == null) {
       _flutterFFmpegConfig = FlutterFFmpegConfig();
-      var version = await _flutterFFmpegConfig.getFFmpegVersion();
-      var platform = await _flutterFFmpegConfig.getPlatform();
+      var version = await _flutterFFmpegConfig!.getFFmpegVersion();
+      var platform = await _flutterFFmpegConfig!.getPlatform();
       _ffmpegAvailable = (version != null && platform != null);
     }
     return _ffmpegAvailable;
@@ -83,9 +83,9 @@ class FlutterSoundHelper {
   /// and without any complain from the link-editor.
   ///
   /// Executes FFmpeg with `commandArguments` provided.
-  Future<int> executeFFmpegWithArguments(List<String> arguments) {
+  Future<int?> executeFFmpegWithArguments(List<String?> arguments) {
     flutterFFmpeg ??= FlutterFFmpeg();
-    return flutterFFmpeg.executeWithArguments(arguments);
+    return flutterFFmpeg!.executeWithArguments(arguments);
   }
 
   /// Get the error code returned by [executeFFmpegWithArguments()].
@@ -95,9 +95,9 @@ class FlutterSoundHelper {
   /// and without any complain from the link-editor.
   ///
   /// This simple verb is used to get the result of the last FFmpeg command.
-  Future<int> getLastFFmpegReturnCode() async {
+  Future<int?> getLastFFmpegReturnCode() async {
     await isFFmpegAvailable();
-    return _flutterFFmpegConfig.getLastReturnCode();
+    return _flutterFFmpegConfig!.getLastReturnCode();
   }
 
   /// Get the log code output by [executeFFmpegWithArguments()].
@@ -109,19 +109,19 @@ class FlutterSoundHelper {
   /// Returns log output of last executed command. Please note that disabling redirection using
   /// This method does not support executing multiple concurrent commands. If you execute multiple commands at the same time, this method will return output from all executions.
   /// `disableRedirection()` method also disables this functionality.
-  Future<String> getLastFFmpegCommandOutput() async {
+  Future<String?> getLastFFmpegCommandOutput() async {
     await isFFmpegAvailable();
-    return _flutterFFmpegConfig.getLastCommandOutput();
+    return _flutterFFmpegConfig!.getLastCommandOutput();
   }
 
   /// Various informations about the Audio specified by the `uri` parameter.
   ///
   /// The informations Map got with FFmpegGetMediaInformation() are [documented here](https://pub.dev/packages/flutter_ffmpeg).
-  Future<Map<dynamic, dynamic>> ffMpegGetMediaInformation(String uri) async {
+  Future<Map<dynamic, dynamic>?> ffMpegGetMediaInformation(String uri) async {
     if (uri == null) return null;
     _flutterFFprobe ??= FlutterFFprobe();
     try {
-      return await _flutterFFprobe.getMediaInformation(uri);
+      return await _flutterFFprobe!.getMediaInformation(uri);
     } on Exception {
       return null;
     }
@@ -131,13 +131,13 @@ class FlutterSoundHelper {
   ///
   /// This verb is used to get an estimation of the duration of a sound file.
   /// Be aware that it is just an estimation, based on the Codec used and the sample rate.
-  Future<Duration> duration(String uri) async {
+  Future<Duration?> duration(String uri) async {
     if (uri == null) return null;
     var info = await ffMpegGetMediaInformation(uri);
     if (info == null) {
       return null;
     }
-    var duration = info['duration'] as int;
+    var duration = info['duration'] as int?;
     return (duration == null) ? null : Duration(milliseconds: duration);
   }
 
@@ -149,8 +149,8 @@ class FlutterSoundHelper {
   ///
   /// Note that this verb is not asynchronous and does not return a Future.
   Future<void> waveToPCM({
-    String inputFile,
-    String outputFile,
+    required String inputFile,
+    required String outputFile,
   }) async {
     var filIn = File(inputFile);
     var filOut = File(outputFile);
@@ -167,7 +167,7 @@ class FlutterSoundHelper {
   ///
   /// Note that this verb is not asynchronous and does not return a Future.
   Uint8List waveToPCMBuffer({
-    Uint8List inputBuffer,
+    required Uint8List inputBuffer,
   }) {
     return inputBuffer.sublist(WaveHeader.headerLength);
   }
@@ -182,8 +182,8 @@ class FlutterSoundHelper {
   ///
   /// [See here](doc/codec.md#note-on-raw-pcm-and-wave-files) a discussion about `Raw PCM` and `WAVE` file format.
   Future<void> pcmToWave({
-    String inputFile,
-    String outputFile,
+    required String inputFile,
+    required String outputFile,
 
     /// Stereophony is not yet implemented
     int numChannels = 1,
@@ -217,7 +217,7 @@ class FlutterSoundHelper {
   ///
   /// Note: the parameters `numChannels` and `sampleRate` **are mandatory, and must match the actual PCM data**. [See here](doc/codec.md#note-on-raw-pcm-and-wave-files) a discussion about `Raw PCM` and `WAVE` file format.
   Future<Uint8List> pcmToWaveBuffer({
-    Uint8List inputBuffer,
+    required Uint8List inputBuffer,
     int numChannels = 1,
     int sampleRate = 16000,
     //int bitsPerSample,
@@ -256,9 +256,9 @@ class FlutterSoundHelper {
   /// Be careful : `outfile` and `outputCodec` must be compatible. The output file extension must be a correct file extension for the new format.
   ///
   /// Note : this verb uses FFmpeg and is not available int the LITE flavor of Flutter Sound.
-  Future<bool> convertFile(String inputFile, Codec inputCodec,
+  Future<bool> convertFile(String? inputFile, Codec? inputCodec,
       String outputFile, Codec outputCodec) async {
-    var rc = 0;
+    int? rc = 0;
     if (inputCodec == Codec.opusOGG &&
         outputCodec == Codec.opusCAF) // Do not need to re-encode. Just remux
     {

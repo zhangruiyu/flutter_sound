@@ -57,8 +57,8 @@ enum AudioSource {
 
 abstract class FlutterSoundRecorderCallback
 {
-  void updateRecorderProgress({int duration, double dbPeakLevel});
-  void recordingData({Uint8List data} );
+  void updateRecorderProgress({int? duration, double? dbPeakLevel});
+  void recordingData({Uint8List? data} );
 }
 
 
@@ -92,7 +92,7 @@ abstract class FlutterSoundRecorderPlatform extends PlatformInterface {
 
 
 
-  List<FlutterSoundRecorderCallback> _slots = [];
+  List<FlutterSoundRecorderCallback?> _slots = [];
 
   @override
   int findSession(FlutterSoundRecorderCallback aSession)
@@ -129,14 +129,14 @@ abstract class FlutterSoundRecorderPlatform extends PlatformInterface {
     _slots[findSession(aSession)] = null;
   }
 
-  FlutterSoundRecorderCallback getSession(int slotno)
+  FlutterSoundRecorderCallback? getSession(int slotno)
   {
     return _slots[slotno];
   }
 
 
 
-  Future<void> initializeFlautoRecorder(FlutterSoundRecorderCallback callback, {AudioFocus focus, SessionCategory category, SessionMode mode, int audioFlags, AudioDevice device})
+  Future<void> initializeFlautoRecorder(FlutterSoundRecorderCallback callback, {AudioFocus? focus, SessionCategory? category, SessionMode? mode, int? audioFlags, AudioDevice? device})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
@@ -146,30 +146,30 @@ abstract class FlutterSoundRecorderPlatform extends PlatformInterface {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<void> setAudioFocus(FlutterSoundRecorderCallback callback, {AudioFocus focus, SessionCategory category, SessionMode mode, int audioFlags, AudioDevice device,} )
+  Future<void> setAudioFocus(FlutterSoundRecorderCallback callback, {AudioFocus? focus, SessionCategory? category, SessionMode? mode, int? audioFlags, AudioDevice? device,} )
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<bool> isEncoderSupported(FlutterSoundRecorderCallback callback, {Codec codec,})
+  Future<bool?> isEncoderSupported(FlutterSoundRecorderCallback callback, {Codec? codec,})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<void> setSubscriptionDuration(FlutterSoundRecorderCallback callback, { Duration duration,})
+  Future<void> setSubscriptionDuration(FlutterSoundRecorderCallback callback, { Duration? duration,})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
   Future<void> startRecorder(FlutterSoundRecorderCallback callback,
   {
-  String path,
-  int sampleRate,
-  int numChannels,
-  int bitRate,
-  Codec codec,
-  bool toStream,
-  AudioSource audioSource,
+  String? path,
+  int? sampleRate,
+  int? numChannels,
+  int? bitRate,
+  Codec? codec,
+  bool? toStream,
+  AudioSource? audioSource,
   })
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
