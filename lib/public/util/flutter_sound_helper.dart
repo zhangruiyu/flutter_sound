@@ -63,14 +63,14 @@ class FlutterSoundHelper {
   /// To know during runtime if FFmpeg is linked with the App.
   ///
   /// returns true if FFmpeg is available (probably the FULL version of Flutter Sound)
-  Future<bool?> isFFmpegAvailable() async {
+  Future<bool> isFFmpegAvailable() async {
     if (_flutterFFmpegConfig == null) {
       _flutterFFmpegConfig = FlutterFFmpegConfig();
       var version = await _flutterFFmpegConfig!.getFFmpegVersion();
       var platform = await _flutterFFmpegConfig!.getPlatform();
       _ffmpegAvailable = (version != null && platform != null);
     }
-    return _ffmpegAvailable;
+    return _ffmpegAvailable??false;
   }
 
   /// A wrapper for the great FFmpeg application.

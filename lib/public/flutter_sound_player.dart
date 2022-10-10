@@ -473,14 +473,14 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       FlutterSoundPlayerPlatform.instance.openSession(this);
       _setPlayerCallback();
       _openAudioSessionCompleter = Completer<FlutterSoundPlayer>();
-      var state = await (FlutterSoundPlayerPlatform.instance
+      var state = await FlutterSoundPlayerPlatform.instance
           .initializeMediaPlayer(this,
               focus: focus,
               category: category,
               mode: mode,
               audioFlags: audioFlags,
               device: device,
-              withUI: withUI) as FutureOr<int>);
+              withUI: withUI);
       _playerState = PlayerState.values[state];
       //isInited = success ?  Initialized.fullyInitialized : Initialized.notInitialized;
     });
@@ -528,14 +528,14 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
         throw (_NotOpen());
       }
 
-      var state = await (FlutterSoundPlayerPlatform.instance.setAudioFocus(
+      var state = await FlutterSoundPlayerPlatform.instance.setAudioFocus(
         this,
         focus: focus,
         category: category,
         mode: mode,
         audioFlags: audioFlags,
         device: device,
-      ) as FutureOr<int>);
+      );
       _playerState = PlayerState.values[state];
     });
     print('FS:<--- setAudioFocus ');
@@ -577,7 +577,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
 
       //_removePlayerCallback(); // playerController is closed by this function
       var state =
-          await (FlutterSoundPlayerPlatform.instance.releaseMediaPlayer(this) as FutureOr<int>);
+          await FlutterSoundPlayerPlatform.instance.releaseMediaPlayer(this);
       _playerState = PlayerState.values[state];
       _removePlayerCallback();
       FlutterSoundPlayerPlatform.instance.closeSession(this);
@@ -599,7 +599,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     if (_isInited != Initialized.fullyInitialized) {
       throw (_NotOpen());
     }
-    var state = await (FlutterSoundPlayerPlatform.instance.getPlayerState(this) as FutureOr<int>);
+    var state = await FlutterSoundPlayerPlatform.instance.getPlayerState(this);
     _playerState = PlayerState.values[state];
     return _playerState;
   }
@@ -661,7 +661,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     // - decode CAF/OPPUS (with native Apple AVFoundation)
 
     if (_needToConvert(codec)) {
-      if (!await (flutterSoundHelper.isFFmpegAvailable() as FutureOr<bool>)) return false;
+      if (!await (flutterSoundHelper.isFFmpegAvailable())) return false;
       var convert = kIsWeb
           ? _tabWebConvert[codec.index]
           : (Platform.isIOS)
@@ -698,7 +698,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       throw (_NotOpen());
     }
     var state = await (FlutterSoundPlayerPlatform.instance
-        .setSubscriptionDuration(this, duration: duration) as FutureOr<int>);
+        .setSubscriptionDuration(this, duration: duration));
     _playerState = PlayerState.values[state];
     print('FS:<---- setSubscriptionDuration ');
   }
@@ -872,7 +872,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
         codec: codec,
         fromDataBuffer: fromDataBuffer,
         fromURI: fromURI,
-      ) as FutureOr<int>);
+      ));
       _playerState = PlayerState.values[state];
     });
     //Duration duration = Duration(milliseconds: retMap['duration'] as int);
@@ -941,7 +941,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
           fromDataBuffer: null,
           fromURI: null,
           numChannels: numChannels,
-          sampleRate: sampleRate) as FutureOr<int>);
+          sampleRate: sampleRate));
       _playerState = PlayerState.values[state];
     });
     print('FS:<--- startPlayerFromStream ');
@@ -970,14 +970,14 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     var totalLength = buffer.length;
     while (totalLength > 0 && !isStopped) {
       var bsize = totalLength > _blockSize ? _blockSize : totalLength;
-      var ln = await (_feed(buffer.sublist(lnData, lnData + bsize)) as FutureOr<int>);
+      var ln = await (_feed(buffer.sublist(lnData, lnData + bsize)));
       lnData += ln;
       totalLength -= ln;
     }
   }
 
   ///
-  Future<int?> _feed(Uint8List data) async {
+  Future<int> _feed(Uint8List data) async {
     if (_isInited == Initialized.initializationInProgress) {
       throw (_InitializationInProgress());
     }
@@ -1114,7 +1114,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
           canSkipBackward: (onSkipBackward != null),
           defaultPauseResume: defaultPauseResume,
           removeUIWhenStopped: removeUIWhenStopped,
-        ) as FutureOr<int>);
+        ));
         _playerState = PlayerState.values[state];
       } on Exception {
         rethrow;
@@ -1159,7 +1159,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       _onSkipBackward = onSkipBackward;
       _onPaused = onPaused;
 
-      var trackDico = (track != null) ? track.toMap() : null;
+      var trackDico = track.toMap();
       defaultPauseResume ??= (onPaused == null);
       var state = await (FlutterSoundPlayerPlatform.instance.nowPlaying(
         this,
@@ -1170,7 +1170,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
         canSkipForward: (onSkipForward != null),
         canSkipBackward: (onSkipBackward != null),
         defaultPauseResume: defaultPauseResume,
-      ) as FutureOr<int>);
+      ));
       _playerState = PlayerState.values[state];
       print('FS:<--- nowPlaying ');
     });
@@ -1224,7 +1224,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       await _foodStreamController!.close();
       _foodStreamController = null;
     }
-    var state = await (FlutterSoundPlayerPlatform.instance.stopPlayer(this) as FutureOr<int>);
+    var state = await (FlutterSoundPlayerPlatform.instance.stopPlayer(this));
 
     _playerState = PlayerState.values[state];
     if (_playerState != PlayerState.isStopped) {
@@ -1252,7 +1252,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     }
     await _lock.synchronized(() async {
       _playerState = PlayerState
-          .values[await (FlutterSoundPlayerPlatform.instance.pausePlayer(this) as FutureOr<int>)];
+          .values[await (FlutterSoundPlayerPlatform.instance.pausePlayer(this))];
       if (_playerState != PlayerState.isPaused) {
         //await _stopPlayerwithCallback( ); // To recover a clean state
         throw _PlayerRunningException(
@@ -1279,7 +1279,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       throw (_NotOpen());
     }
     await _lock.synchronized(() async {
-      var state = await (FlutterSoundPlayerPlatform.instance.resumePlayer(this) as FutureOr<int>);
+      var state = await (FlutterSoundPlayerPlatform.instance.resumePlayer(this));
       _playerState = PlayerState.values[state];
       if (_playerState != PlayerState.isPlaying) {
         //await _stopPlayerwithCallback( ); // To recover a clean state
@@ -1310,7 +1310,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       var state = await (FlutterSoundPlayerPlatform.instance.seekToPlayer(
         this,
         duration: duration,
-      ) as FutureOr<int>);
+      ));
       _playerState = PlayerState.values[state];
     });
     //print('FS:<--- seekToPlayer ');
@@ -1342,7 +1342,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       var state = await (FlutterSoundPlayerPlatform.instance.setVolume(
         this,
         volume: indexedVolume,
-      ) as FutureOr<int>);
+      ));
       _playerState = PlayerState.values[state];
     });
     print('FS:<--- setVolume ');
@@ -1367,7 +1367,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     print('FS:---> setUIProgressBar : duration=$duration  progress=$progress');
     await _lock.synchronized(() async {
       var state = await (FlutterSoundPlayerPlatform.instance
-          .setUIProgressBar(this, duration: duration, progress: progress) as FutureOr<int>);
+          .setUIProgressBar(this, duration: duration, progress: progress));
       _playerState = PlayerState.values[state];
     });
     print('FS:<--- setUIProgressBar ');

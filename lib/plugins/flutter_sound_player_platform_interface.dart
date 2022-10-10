@@ -118,22 +118,22 @@ abstract class FlutterSoundPlayerPlatform extends PlatformInterface {
 
 
 
-  Future<int?> initializeMediaPlayer(FlutterSoundPlayerCallback callback, {AudioFocus? focus, SessionCategory? category, SessionMode? mode, int? audioFlags, AudioDevice? device, bool? withUI,})
+  Future<int> initializeMediaPlayer(FlutterSoundPlayerCallback callback, {AudioFocus? focus, SessionCategory? category, SessionMode? mode, int? audioFlags, AudioDevice? device, bool? withUI,})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> setAudioFocus(FlutterSoundPlayerCallback callback, {AudioFocus? focus, SessionCategory? category, SessionMode? mode, int? audioFlags, AudioDevice? device,} )
+  Future<int> setAudioFocus(FlutterSoundPlayerCallback callback, {AudioFocus? focus, SessionCategory? category, SessionMode? mode, int? audioFlags, AudioDevice? device,} )
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> releaseMediaPlayer(FlutterSoundPlayerCallback callback, )
+  Future<int> releaseMediaPlayer(FlutterSoundPlayerCallback callback, )
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> getPlayerState(FlutterSoundPlayerCallback callback, )
+  Future<int> getPlayerState(FlutterSoundPlayerCallback callback, )
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
@@ -148,57 +148,57 @@ abstract class FlutterSoundPlayerPlatform extends PlatformInterface {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> setSubscriptionDuration(FlutterSoundPlayerCallback callback, {Duration? duration})
+  Future<int> setSubscriptionDuration(FlutterSoundPlayerCallback callback, {Duration? duration})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> startPlayer(FlutterSoundPlayerCallback callback, {Codec? codec, Uint8List? fromDataBuffer, String?  fromURI, int? numChannels, int? sampleRate})
+  Future<int> startPlayer(FlutterSoundPlayerCallback callback, {Codec? codec, Uint8List? fromDataBuffer, String?  fromURI, int? numChannels, int? sampleRate})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> feed(FlutterSoundPlayerCallback callback, {Uint8List? data, })
+  Future<int> feed(FlutterSoundPlayerCallback callback, {Uint8List? data, })
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> startPlayerFromTrack(FlutterSoundPlayerCallback callback, {Duration? progress, Duration? duration, Map<String, dynamic>? track, bool? canPause, bool? canSkipForward, bool? canSkipBackward, bool? defaultPauseResume, bool? removeUIWhenStopped })
+  Future<int> startPlayerFromTrack(FlutterSoundPlayerCallback callback, {Duration? progress, Duration? duration, Map<String, dynamic>? track, bool? canPause, bool? canSkipForward, bool? canSkipBackward, bool? defaultPauseResume, bool? removeUIWhenStopped })
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> nowPlaying(FlutterSoundPlayerCallback callback, {Duration? progress, Duration? duration, Map<String, dynamic>? track, bool? canPause, bool? canSkipForward, bool? canSkipBackward, bool? defaultPauseResume,})
+  Future<int> nowPlaying(FlutterSoundPlayerCallback callback, {Duration? progress, Duration? duration, Map<String, dynamic>? track, bool? canPause, bool? canSkipForward, bool? canSkipBackward, bool? defaultPauseResume,})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> stopPlayer(FlutterSoundPlayerCallback callback,  )
+  Future<int> stopPlayer(FlutterSoundPlayerCallback callback,  )
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> pausePlayer(FlutterSoundPlayerCallback callback,  )
+  Future<int> pausePlayer(FlutterSoundPlayerCallback callback,  )
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> resumePlayer(FlutterSoundPlayerCallback callback,  )
+  Future<int> resumePlayer(FlutterSoundPlayerCallback callback,  )
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> seekToPlayer(FlutterSoundPlayerCallback callback, {Duration? duration})
+  Future<int> seekToPlayer(FlutterSoundPlayerCallback callback, {required Duration duration})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> setVolume(FlutterSoundPlayerCallback callback, {double? volume})
+  Future<int> setVolume(FlutterSoundPlayerCallback callback, {double? volume})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
 
-  Future<int?> setUIProgressBar(FlutterSoundPlayerCallback callback, {Duration? duration, Duration? progress,})
+  Future<int> setUIProgressBar(FlutterSoundPlayerCallback callback, {Duration? duration, Duration? progress,})
   {
     throw UnimplementedError('invokeMethod() has not been implemented.');
   }
