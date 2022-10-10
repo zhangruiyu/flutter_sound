@@ -241,7 +241,7 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
   ///         if ( await myRecorder.isEncoderSupported(Codec.opusOGG) ) doSomething;
   /// ```
   /// `isEncoderSupported` is a method for legacy reason, but should be a static function.
-  Future<bool?> isEncoderSupported(Codec codec) async {
+  Future<bool> isEncoderSupported(Codec codec) async {
     // For encoding ogg/opus on ios, we need to support two steps :
     // - encode CAF/OPPUS (with native Apple AVFoundation)
     // - remux CAF file format to OPUS file format (with ffmpeg)
@@ -252,7 +252,7 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
       throw (_NotOpen());
     }
 
-    bool? result;
+    bool result;
     // For encoding ogg/opus on ios, we need to support two steps :
     // - encode CAF/OPPUS (with native Apple AVFoundation)
     // - remux CAF file format to OPUS file format (with ffmpeg)
@@ -363,7 +363,7 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
     if (_recorderState != null && _recorderState != RecorderState.isStopped) {
       throw _RecorderRunningException('Recorder is not stopped.');
     }
-    if (!await (isEncoderSupported(codec) as FutureOr<bool>)) {
+    if (!await (isEncoderSupported(codec))) {
       throw _CodecNotSupportedException('Codec not supported.');
     }
 

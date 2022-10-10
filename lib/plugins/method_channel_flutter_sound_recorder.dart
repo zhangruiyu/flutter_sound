@@ -76,10 +76,10 @@ class MethodChannelFlutterSoundRecorder extends FlutterSoundRecorderPlatform {
     return _channel.invokeMethod(methodName, call);
   }
 
-  Future<bool?> invokeMethodBool(FlutterSoundRecorderCallback callback,
-      String methodName, Map<String, dynamic> call) {
+  Future<bool> invokeMethodBool(FlutterSoundRecorderCallback callback,
+      String methodName, Map<String, dynamic> call) async {
     call['slotNo'] = findSession(callback);
-    return _channel.invokeMethod(methodName, call);
+    return (await _channel.invokeMethod(methodName, call))!;
   }
 
   Future<String?> invokeMethodString(FlutterSoundRecorderCallback callback,
@@ -142,7 +142,7 @@ class MethodChannelFlutterSoundRecorder extends FlutterSoundRecorderPlatform {
   }
 
   @override
-  Future<bool?> isEncoderSupported(
+  Future<bool> isEncoderSupported(
     FlutterSoundRecorderCallback callback, {
     Codec? codec,
   }) {
@@ -152,7 +152,7 @@ class MethodChannelFlutterSoundRecorder extends FlutterSoundRecorderPlatform {
       {
         'codec': codec!.index,
       },
-    ) as Future<bool?>;
+    );
   }
 
   @override
